@@ -1,23 +1,35 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { MatCardModule } from '@angular/material/card'
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { ProductService } from './services/product.service';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { SearchComponent } from './components/header/search/search.component';
+import { CartSectionComponent } from './components/header/cart-section/cart-section.component';
+import { MaterialModule } from './material.module';
+import { EshopComponent } from './components/eshop/eshop.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent
+    EshopComponent,
+    ProductListComponent,
+    HeaderComponent,
+    FooterComponent,
+    SidebarComponent,
+    SearchComponent,
+    CartSectionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatCardModule,
+    MaterialModule
   ],
   providers: [
     provideAnimationsAsync(),
