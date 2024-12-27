@@ -1,8 +1,15 @@
-.mat-mdc-header-row {
-   background-color: black;
-   color: white;
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 15px;
+    background-color: #e0e0e0;
+    border-radius: 5px;
 }
-
 img {
     vertical-align: middle;
+}
+.mat-mdc-paginator {
+    border-radius: 5px;
 }

@@ -14,17 +14,20 @@ import { SearchComponent } from './components/header/search/search.component';
 import { CartSectionComponent } from './components/header/cart-section/cart-section.component';
 import { MaterialModule } from './material.module';
 import { EshopComponent } from './components/eshop/eshop.component';
+import { ProductComponent } from './components/product-list/product/product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    CartSectionComponent,
     EshopComponent,
-    ProductListComponent,
-    HeaderComponent,
     FooterComponent,
+    HeaderComponent,
+    ProductListComponent,
+    ProductComponent,
     SidebarComponent,
     SearchComponent,
-    CartSectionComponent
+
   ],
   imports: [
     BrowserModule,

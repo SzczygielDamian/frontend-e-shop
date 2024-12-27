@@ -1,0 +1,16 @@
+<div class="container">
+   @let item = product();
+   <span>
+      <img src="{{ item.imageUrl }}" height="150"/>
+   </span>
+    <span>
+      {{ item.name }}
+    </span>
+    <span class="price">
+      {{ item.unitPrice | currency: 'USD' }}
+    </span>
+   
+     <button class="purchase-button">
+        Add to cart
+     </button>
+</div>
