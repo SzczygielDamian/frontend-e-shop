@@ -1,9 +1,9 @@
 <div class="container">
   <div class="sidebar-content">
     <ul>
-      @for (element of sidebarElements; track $index) {
+      @for (productCategory of productCategories(); track $index) {
         <li>
-          <a routerLink="/category/{{$index + 1}}" routerLinkActive="active-link">{{element}}</a>
+          <a routerLink="/category/{{productCategory.id}}" routerLinkActive="active-link">{{ productCategory.categoryName }}</a>
         </li>
       }
     </ul>

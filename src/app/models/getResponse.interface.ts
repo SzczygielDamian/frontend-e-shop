@@ -1,7 +1,7 @@
 import { Product } from "./product.interface"
 
-export interface GetResponse {
+export interface GetResponse<K extends string | number, V> {
     _embedded: {
-        products: Product[];
+        [key in K]: V[];
     }
 }
