@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { ProductCategory } from '../../models/productCategory.interface';
+import { ProductService } from '../../services/product.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,6 +9,19 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './sidebar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SidebarComponent {
-  sidebarElements: string[] = ["Books", "Coffee Mugs", "Mouse Pads", "Luggage Tags"];
+export class SidebarComponent implements OnInit {
+  
+  productCategories = signal<ProductCategory[] | []>([]);
+  private productService = inject(ProductService);
+
+  ngOnInit(): void {
+   this.listProductCategories();
+  }
+
+
+  listProductCategories() {
+   this.productService.getProductCategories().subscribe(data => {
+    this.productCategories.set(data);
+   })
+  }
 }
