@@ -1,10 +1,16 @@
 <div class="container">
-  @for (item of productsSignal(); track $index) {
-    <app-product
-      [product] = "item"
-    >
-    </app-product>
+  @let products = productsSignal();
+  @if (products.length > 0) {
+    @for (item of products; track $index) {
+      <app-product
+        [product] = "item"
+      >
+      </app-product>
+    }
+  } @else {
+    No products found.
   }
+  
 </div>
 <mat-paginator 
   [pageSizeOptions]="[5, 10, 20]"

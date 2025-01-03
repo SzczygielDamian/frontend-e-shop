@@ -19,7 +19,12 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(() => {
-      this.getProductsList();
+      if (this.route.snapshot.paramMap.has('keyword')) {
+        this.getSearchProducts();
+      } else {
+        this.getProductsList();
+      }
+      
     })
   }
 
@@ -28,5 +33,11 @@ export class ProductListComponent implements OnInit {
     this.productService.getProductList(this.currentCategoryId).subscribe(data => {
       this.productsSignal.set(data);
     })
+  }
+
+  getSearchProducts() {
+    this.productService.searchProducts(this.route.snapshot.paramMap.get('keyword') as string).subscribe(data => {
+      this.productsSignal.set(data);
+    });
   }
 }
