@@ -1,1 +1,15 @@
-<p>search works!</p>
+<div class="container">
+    <mat-form-field class="rounded">
+        <mat-label>Search for products</mat-label>
+        <input 
+        matInput 
+        #myInput
+        name="search"
+        (keyup.enter)="doSearch(myInput.value)"
+        >
+    </mat-form-field>  
+    <button 
+    (click)="doSearch(myInput.value)"
+    mat-stroked-button
+    >Search</button>
+</div>

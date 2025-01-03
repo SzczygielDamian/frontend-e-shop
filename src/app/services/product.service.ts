@@ -22,6 +22,12 @@ export class ProductService {
     );
   }
 
+  searchProducts(name: string): Observable<Product[]> {
+    return this.httpClient.get<GetResponse<'products', Product>>(this.baseUrl + "products/search/findByNameContaining?name=" + name).pipe(
+      map(res => res._embedded.products)
+    );
+  }
+
   getProductCategories(): Observable<ProductCategory[]> {
     return this.httpClient.get<GetResponse<'productCategory', ProductCategory>>(this.baseUrl + 'product-category').pipe(
       map(res => res._embedded.productCategory)

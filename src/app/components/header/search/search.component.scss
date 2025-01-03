@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .mat-mdc-form-field {
+        width: 40vw;
+        margin-top: 14px;
+        padding-left: 50px;
+    }
+  
+    button {
+        margin-left: 20px;
+        background: #fff;
+    }
+}
