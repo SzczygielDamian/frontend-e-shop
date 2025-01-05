@@ -15,6 +15,7 @@ import { CartSectionComponent } from './components/header/cart-section/cart-sect
 import { MaterialModule } from './material.module';
 import { EshopComponent } from './components/eshop/eshop.component';
 import { ProductComponent } from './components/product-list/product/product.component';
+import { ProductDetailsComponent } from './components/product-details/product-details.component';
 
 @NgModule({
   declarations: [
@@ -23,11 +24,11 @@ import { ProductComponent } from './components/product-list/product/product.comp
     EshopComponent,
     FooterComponent,
     HeaderComponent,
-    ProductListComponent,
     ProductComponent,
+    ProductDetailsComponent,
+    ProductListComponent,
     SidebarComponent,
     SearchComponent,
-
   ],
   imports: [
     BrowserModule,

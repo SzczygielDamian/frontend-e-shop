@@ -1,10 +1,14 @@
 <div class="container">
    @let item = product();
    <span>
-      <img src="{{ item.imageUrl }}" height="150"/>
+      <a routerLink="/product/{{ item.id }}">
+       <img src="{{ item.imageUrl }}" height="150"/>
+      </a>
    </span>
     <span>
-      {{ item.name }}
+      <a routerLink="/product/{{ item.id }}">
+       {{ item.name }}
+      </a>
     </span>
     <span class="price">
       {{ item.unitPrice | currency: 'USD' }}

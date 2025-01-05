@@ -1,23 +1,14 @@
 .container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    width: 150px;
-    height: 100%;
-
-    a {
-        color: #000;
-        text-decoration: none;
-    }
-
-    span {
-        padding: 5px 0;
-        text-align: center; 
-    }
 
     .price {
+        font-size: 20px;
+        font-weight: 600;
         color: #0076CE;
+        margin: 15px 0;
     }
 
     .purchase-button { 
@@ -33,7 +24,12 @@
         transition: background-color 0.3s ease; 
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     } 
+
     .purchase-button:hover { 
         background-color: #0056b3; 
+    }
+
+    .description {
+        width: 80%;
     }
 }
