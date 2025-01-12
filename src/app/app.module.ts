@@ -16,6 +16,7 @@ import { MaterialModule } from './material.module';
 import { EshopComponent } from './components/eshop/eshop.component';
 import { ProductComponent } from './components/product-list/product/product.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { PaginationComponent } from './shared/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ProductDetailsComponent } from './components/product-details/product-de
     EshopComponent,
     FooterComponent,
     HeaderComponent,
+    PaginationComponent,
     ProductComponent,
     ProductDetailsComponent,
     ProductListComponent,
