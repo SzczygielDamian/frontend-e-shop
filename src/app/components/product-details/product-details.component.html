@@ -6,7 +6,7 @@
     <div class="price">
         {{ product?.unitPrice | currency:'USD' }}
     </div>
-    <button class="purchase-button">
+    <button class="purchase-button" (click)="addToCart($any(product))">
         Add to cart
      </button>
 
