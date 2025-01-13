@@ -1,1 +1,9 @@
-<p>cart-section works!</p>
+<div class="container">
+    <a>
+        <div class="total_price">
+            {{ totalPrice() | currency: 'USD' }}
+            <span>{{ totalQuantity() }}</span>
+        </div>
+        <mat-icon aria-hidden="false" aria-label="Example shopping cart icon" fontIcon="shopping_cart"></mat-icon>
+    </a>
+</div>

@@ -14,7 +14,7 @@
       {{ item.unitPrice | currency: 'USD' }}
     </span>
    
-     <button class="purchase-button">
+     <button class="purchase-button" (click)="addToCart(item)">
         Add to cart
      </button>
 </div>
