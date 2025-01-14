@@ -1,0 +1,61 @@
+@if (cartItems.length) {
+<section class="example-container mat-elevation-z8" tabindex="0">
+  <table mat-table [dataSource]="cartItems">
+
+    <ng-container matColumnDef="product" sticky>
+      <th mat-header-cell *matHeaderCellDef> Product </th>
+      <td mat-cell *matCellDef="let element">
+        <span>
+          <img src="{{ element.imageUrl }}" height="150" />
+          {{ element.name }}
+        </span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let element"> {{ element.unitPrice | currency:'USD' }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="quantity">
+      <th mat-header-cell *matHeaderCellDef> Quantity </th>
+      <td mat-cell *matCellDef="let element">
+        <div class="quantity-container">
+          <button mat-fab aria-label="Example icon button with a decrement icon" 
+          (click)="decremental(element)"
+          [disabled]="element._quantity === 1 ? true : false"
+          >
+            <mat-icon>remove</mat-icon>
+          </button>
+          <span>
+            {{ element._quantity }}
+          </span>
+          <button mat-fab aria-label="Example icon button with a increment icon" (click)="incremental(element)">
+            <mat-icon>add</mat-icon>
+          </button>
+          <button class="delete" mat-fab aria-label="Example icon button with a increment icon" (click)="delete(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="subtotal">
+      <th mat-header-cell *matHeaderCellDef> Subtotal </th>
+      <td mat-cell *matCellDef="let element"> {{ element._quantity * element.unitPrice | currency:'USD'}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</section>
+
+<div class="cart-totals">
+  <h4>Cart Totals</h4>
+  <p><span>Total:</span> {{ totalPrice | currency:'USD' }} </p>
+</div>
+} @else {
+<!--ADD ALERT COMPONENT !!-->
+YOUR SHOPPING CART IS EMPTY
+}
