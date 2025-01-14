@@ -22,8 +22,8 @@ export class CartSectionComponent implements OnInit, OnDestroy {
   }
 
   updateCartStatus(): void  {
-    this.subscriptions.push(this.cartService.totalPrice.subscribe(price => this.totalPrice.set(price)));
-    this.subscriptions.push(this.cartService.totalQuantity.subscribe(quanity => this.totalQuantity.set(quanity)));
+    this.subscriptions.push(this.cartService.totalPrice$.subscribe(price => this.totalPrice.set(price)));
+    this.subscriptions.push(this.cartService.totalQuantity$.subscribe(quanity => this.totalQuantity.set(quanity)));
   }
 
   ngOnDestroy() {
