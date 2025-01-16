@@ -1,0 +1,137 @@
+<mat-stepper #stepper>
+  <mat-step [stepControl]="customer" errorMessage="Customer is required.">
+    <form [formGroup]="customer">
+      <ng-template matStepLabel>Customer</ng-template>
+      <mat-form-field>
+        <mat-label>First Name</mat-label>
+        <input matInput placeholder="First name" formControlName="firstName" required>
+        @if (customer.controls.firstName.invalid) {
+        <mat-error>First Name must be at least 2 characters long</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Last Name</mat-label>
+        <input matInput placeholder="Last name" formControlName="lastName" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>Last Name must be at least 2 characters long</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="example@gmial.com" formControlName="email" required>
+        @if (customer.controls.email.invalid) {
+          <mat-error>Email must be a valid email address format</mat-error>
+        }
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperNext>Next Step</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step [stepControl]="shippingAddress" errorMessage="Address is required.">
+    <form [formGroup]="shippingAddress">
+      <ng-template matStepLabel>Shipping address</ng-template>
+      <mat-form-field>
+        <mat-label>Country</mat-label>
+        <input matInput placeholder="Ex. 1 Main St, New York, NY" formControlName="country" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>Country must be at least 2 characters long</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Street</mat-label>
+        <input matInput placeholder="Street" formControlName="street" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>Street must be at least 2 characters long</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>City</mat-label>
+        <input matInput placeholder="city" formControlName="city" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>City must be at least 2 characters long</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>State</mat-label>
+        <input matInput placeholder="state" formControlName="state" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>State must be at least 2 characters long</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Zip code</mat-label>
+        <input matInput placeholder="zip code" formControlName="zipCode" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>Zip code must be at 5 numbers example: 27-400</mat-error>
+        }
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next Step</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="creditCard" errorMessage="Credit card is required.">
+    <form [formGroup]="creditCard">
+      <ng-template matStepLabel>Card Type</ng-template>
+      <mat-form-field>
+        <mat-label>Card Type</mat-label>
+        <input matInput placeholder="card Type" formControlName="cardType" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>Card Type must be at least 2 characters long</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Name on card</mat-label>
+        <input matInput placeholder="Name on card" formControlName="nameOnCard" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>>Name on card must be at least 2 characters long</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Card number</mat-label>
+        <input matInput placeholder="Card number" formControlName="cardNumber" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>Card number must be at 16 numbers</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Security code</mat-label>
+        <input matInput placeholder="Security code" formControlName="securityCode" required>
+        @if (customer.controls.lastName.invalid) {
+          <mat-error>Security code must be at 3 numbers</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Expiration month</mat-label>
+        <mat-select formControlName="expirationMonth">
+          @for (month of creditCardMonth$ | async; track month) {
+          <mat-option [value]="month">{{ month }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Expiration yaer</mat-label>
+        <mat-select formControlName="expirationYear">
+          @for (year of creditCardYear$ | async; track year) {
+          <mat-option [value]="year">{{ year }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next Step</button>
+      </div>
+    </form>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button matStepperPrevious>Back</button>
+      <button mat-button (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-stepper>
