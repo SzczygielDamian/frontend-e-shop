@@ -18,12 +18,15 @@ import { ProductComponent } from './components/product-list/product/product.comp
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckOutComponent } from './components/check-out/check-out.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     CartDetailsComponent,
     CartSectionComponent,
+    CheckOutComponent,
     EshopComponent,
     FooterComponent,
     HeaderComponent,
@@ -37,12 +40,13 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideAnimationsAsync(),
     provideHttpClient(),
-    ProductService
+    ProductService,
   ],
   bootstrap: [AppComponent]
 })

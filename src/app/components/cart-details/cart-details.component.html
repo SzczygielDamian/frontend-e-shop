@@ -54,6 +54,7 @@
 <div class="cart-totals">
   <h4>Cart Totals</h4>
   <p><span>Total:</span> {{ totalPrice | currency:'USD' }} </p>
+  <button routerLink="/check-out" mat-stroked-button>CheckOut</button>
 </div>
 } @else {
 <!--ADD ALERT COMPONENT !!-->
