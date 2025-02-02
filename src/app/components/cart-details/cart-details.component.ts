@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, inject, OnDestro
 import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cartItem.interface';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart-details',
@@ -18,7 +19,9 @@ export class CartDetailsComponent implements OnInit, OnDestroy {
     'subtotal'
   ];
     private cartService = inject(CartService);
+    private router = inject(Router);
     private subscriptions: Subscription[] = [];
+    activeUrl: string = '';
 
     cartItems: CartItem[] = [];
     totalPrice: number = 0;
@@ -27,7 +30,8 @@ export class CartDetailsComponent implements OnInit, OnDestroy {
     
 
     ngOnInit(): void {
-      this.cartDetails();  
+      this.cartDetails();
+      this.activeUrl = this.router.url;
     }
 
     cartDetails(): void {

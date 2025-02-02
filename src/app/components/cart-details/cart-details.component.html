@@ -20,24 +20,31 @@
     <ng-container matColumnDef="quantity">
       <th mat-header-cell *matHeaderCellDef> Quantity </th>
       <td mat-cell *matCellDef="let element">
-        <div class="quantity-container">
-          <button mat-fab aria-label="Example icon button with a decrement icon" 
-          (click)="decremental(element)"
-          [disabled]="element._quantity === 1 ? true : false"
-          >
-            <mat-icon>remove</mat-icon>
-          </button>
-          <span>
-            {{ element._quantity }}
-          </span>
-          <button mat-fab aria-label="Example icon button with a increment icon" (click)="incremental(element)">
-            <mat-icon>add</mat-icon>
-          </button>
-          <button class="delete" mat-fab aria-label="Example icon button with a increment icon" (click)="delete(element)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </div>
-
+        @if (activeUrl === '/cart-details') {
+          <div class="quantity-container">
+            <button mat-fab aria-label="Example icon button with a decrement icon" 
+            (click)="decremental(element)"
+            [disabled]="element._quantity === 1 ? true : false"
+            >
+              <mat-icon>remove</mat-icon>
+            </button>
+            <span>
+              {{ element._quantity }}
+            </span>
+            <button mat-fab aria-label="Example icon button with a increment icon" (click)="incremental(element)">
+              <mat-icon>add</mat-icon>
+            </button>
+            <button class="delete" mat-fab aria-label="Example icon button with a increment icon" (click)="delete(element)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        } @else {
+          <div class="quantity-container">
+            <span>
+              {{ element._quantity }}
+            </span>
+          </div>
+        }
       </td>
     </ng-container>
 
@@ -51,11 +58,21 @@
   </table>
 </section>
 
-<div class="cart-totals">
-  <h4>Cart Totals</h4>
-  <p><span>Total:</span> {{ totalPrice | currency:'USD' }} </p>
-  <button routerLink="/check-out" mat-stroked-button>CheckOut</button>
-</div>
+@if (activeUrl === '/cart-details') {
+  <div class="cart-totals" >
+    <h4>Cart Totals</h4>
+    <p><span>Total:</span> {{ totalPrice | currency:'USD' }} </p>
+    <button 
+    routerLink="/check-out" 
+    [queryParams]="{ 
+      totalPrice: totalPrice,
+      totalQuantity: totalQuantity,
+      cartItems: cartItems
+      }"
+    mat-stroked-button
+    >CheckOut</button>
+  </div>
+}
 } @else {
 <!--ADD ALERT COMPONENT !!-->
 YOUR SHOPPING CART IS EMPTY

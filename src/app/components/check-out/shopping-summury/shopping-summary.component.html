@@ -1,0 +1,79 @@
+<div class="summary-container">
+  <app-cart-details></app-cart-details>
+  <div class="data-container">
+    @let customer = _customer();
+    <div class="data-summary-container">
+      <span>Customer</span>
+      <div>
+        <mat-form-field>
+          <mat-label>First Name</mat-label>
+          <input matInput [value]="customer.firstName" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Last Name</mat-label>
+          <input matInput [value]="customer.lastName" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput [value]="customer.email" disabled />
+        </mat-form-field>
+      </div>
+    </div>
+    @let shippingAddress = _shippingAddress();
+    <div class="data-summary-container">
+      <span>Shipping Address</span>
+      <div>
+        <mat-form-field>
+          <mat-label>Country</mat-label>
+          <input matInput [value]="shippingAddress.country" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Street</mat-label>
+          <input matInput [value]="shippingAddress.street" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>City</mat-label>
+          <input matInput [value]="shippingAddress.city" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>State</mat-label>
+          <input matInput [value]="shippingAddress.state" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Zip code</mat-label>
+          <input matInput [value]="shippingAddress.zipCode" disabled />
+        </mat-form-field>
+      </div>
+    </div>
+    @let creditCard = _creditCard();
+    <div class="data-summary-container">
+      <span>Credit Card</span>
+      <div>
+        <mat-form-field>
+          <mat-label>Card Type</mat-label>
+          <input matInput [value]="creditCard.cardType" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Name on card</mat-label>
+          <input matInput [value]="creditCard.nameOnCard" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Card number</mat-label>
+          <input matInput [value]="creditCard.cardNumber" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Security code</mat-label>
+          <input matInput [value]="creditCard.securityCode" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Expiration month</mat-label>
+          <input matInput [value]="creditCard.expirationMonth" disabled />
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Expiration yaer</mat-label>
+          <input matInput [value]="creditCard.expirationYear" disabled />
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</div>

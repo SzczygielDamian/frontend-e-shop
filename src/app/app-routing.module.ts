@@ -7,7 +7,7 @@ import { CheckOutComponent } from './components/check-out/check-out.component';
 
 const routes: Routes = [
   { path: 'check-out', component: CheckOutComponent },
-  { path: 'cart-detials', component: CartDetailsComponent },
+  { path: 'cart-details', component: CartDetailsComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
   { path: 'category/:id', component: ProductListComponent },
   { path: 'search/:keyword', component: ProductListComponent },
@@ -17,7 +17,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot([...routes], {
+      bindToComponentInputs: true,
+    })
+  ],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
