@@ -1,0 +1,26 @@
+.summary-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    mat-form-field {
+        margin: 5px;
+    }
+
+    .data-container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .data-summary-container {
+        display: flex;
+        flex-direction: column;
+    }
+    
+}
+
+app-cart-details {
+    display: flex;
+    width: 50%;
+    margin-right: 60px;
+}

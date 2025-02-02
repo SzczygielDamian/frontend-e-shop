@@ -20,6 +20,7 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ShoppingSummaryComponent } from './components/check-out/shopping-summury/shopping-summary.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductListComponent,
     SidebarComponent,
     SearchComponent,
+    ShoppingSummaryComponent,
   ],
   imports: [
     BrowserModule,

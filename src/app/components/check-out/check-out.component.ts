@@ -1,9 +1,18 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, numberAttribute, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CreditCardService } from '../../services/credit-card.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { CustomValidatorsService } from '../../services/custom-validators.service';
+import { Order } from '../../models/order.inteface';
+import { CartItem } from '../../models/cartItem.interface';
+import { CartService } from '../../services/cart.service';
+import { OrderItem } from '../../models/orderItem.inteface';
+import { Purchase } from '../../models/purchase.interace';
+import { Customer } from '../../models/customer.interface';
+import { Address } from '../../models/address.inteface';
+import { CheckoutService } from '../../services/checkout.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-out',
@@ -21,11 +30,19 @@ import { CustomValidatorsService } from '../../services/custom-validators.servic
 })
 export class CheckOutComponent implements OnInit {
 
-  private _formBuilder = inject(FormBuilder);
+  _formBuilder = inject(FormBuilder);
   private crediCardService = inject(CreditCardService);
+  private cartService = inject(CartService);
+  private checkoutService = inject(CheckoutService);
+  private router = inject(Router);
   
   creditCardMonth$?: Observable<number[]>;
   creditCardYear$?: Observable<number[]>;
+  cartItems: CartItem[] = [];
+  private subscriptions: Subscription[] = [];
+
+  totalPrice = input(undefined, { transform: numberAttribute});
+  totalQuantity = input(undefined, { transform: numberAttribute});
 
   customer = this._formBuilder.group({
     firstName: ['', [Validators.required, Validators.minLength(2), CustomValidatorsService.notOnlyWhitespace]],
@@ -50,6 +67,61 @@ export class CheckOutComponent implements OnInit {
 
   ngOnInit(): void {
     this.creditCardMonth$ = this.crediCardService.getCreditCardMonth();
-    this.creditCardYear$ = this.crediCardService.getCreditCardYears();
+    this.creditCardYear$ = this.crediCardService.getCreditCardYears();   
+
+    this.subscriptions.push(this.cartService.cartItems$.subscribe(items => this.cartItems = items));
+  }
+
+  onSubmit() {
+    let purchase: Purchase;
+    let order: Order = {} as Order;
+    
+    if (typeof this.totalPrice() === 'number' && typeof this.totalQuantity() === 'number') {
+        order = {
+          totalQuantity: this.totalQuantity() as number,
+          totalPrice: this.totalPrice() as number
+        }
+    }
+
+    let orderItems: OrderItem[] = [];
+    for (let i=0; i < this.cartItems.length; i++) {
+      orderItems[i] = {
+        imageUrl: this.cartItems[i].imageUrl,
+        unitPrice: this.cartItems[i].unitPrice,
+        quanitity: this.cartItems[i]._quantity,
+        productId: this.cartItems[i].id
+      }
+    }
+    
+    purchase = {
+      customer: this.customer.value as Customer,
+      shippingAddress: this.shippingAddress.value as Address,
+      order,
+      orderItems: orderItems
+    }
+
+    this.checkoutService.placeOrder(purchase).subscribe(
+      {
+        next: res => {
+          console.log(res.orderTrackingNumber);
+          this.resetCart();
+        },
+        error: err => {
+          console.log(err.message);
+        }
+      }
+    )
+  }
+
+  resetCart() {
+    this.cartService.cartItems = [];
+    this.cartService.totalPrice$.next(0);
+    this.cartService.totalQuantity$.next(0);
+
+    this.customer.reset();
+    this.shippingAddress.reset();
+    this.creditCard.reset();
+
+    this.router.navigateByUrl("/products");
   }
 }
