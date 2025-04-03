@@ -21,6 +21,8 @@ import { CartDetailsComponent } from './components/cart-details/cart-details.com
 import { CheckOutComponent } from './components/check-out/check-out.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShoppingSummaryComponent } from './components/check-out/shopping-summury/shopping-summary.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginStatusComponent } from './components/login-status/login-status.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ShoppingSummaryComponent } from './components/check-out/shopping-summur
     EshopComponent,
     FooterComponent,
     HeaderComponent,
+    LoginComponent,
+    LoginStatusComponent,
     PaginationComponent,
     ProductComponent,
     ProductDetailsComponent,

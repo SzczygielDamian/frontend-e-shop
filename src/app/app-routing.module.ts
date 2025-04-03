@@ -5,7 +5,20 @@ import { ProductDetailsComponent } from './components/product-details/product-de
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
 import { CheckOutComponent } from './components/check-out/check-out.component';
 
+import { OktaAuthModule, OktaCallbackComponent, OKTA_CONFIG } from '@okta/okta-angular';
+
+import { OktaAuth } from '@okta/okta-auth-js'; 
+
+import myAppConfig from './config/my-app-config';
+import { LoginComponent } from './components/login/login.component';
+
+const oktaConfig = myAppConfig.oidc;
+
+const oktaAuth = new OktaAuth(oktaConfig);
+
 const routes: Routes = [
+  { path: 'login/callback', component: OktaCallbackComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'check-out', component: CheckOutComponent },
   { path: 'cart-details', component: CartDetailsComponent },
   { path: 'product/:id', component: ProductDetailsComponent },
@@ -20,7 +33,11 @@ const routes: Routes = [
   imports: [
     RouterModule.forRoot([...routes], {
       bindToComponentInputs: true,
-    })
+    }),
+    OktaAuthModule,
+  ],
+  providers: [{
+    provide: OKTA_CONFIG, useValue: { oktaAuth}}
   ],
   exports: [RouterModule]
 })
