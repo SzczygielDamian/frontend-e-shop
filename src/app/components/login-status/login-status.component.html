@@ -1,0 +1,14 @@
+<div>
+    @if (!isAuthenticated) {
+        <button 
+        mat-stroked-button
+        routerLink="/login"
+        >Login</button>
+    } @else {
+        <button 
+        mat-stroked-button
+        (click)="logout()"
+        >Logout</button>
+    }
+    
+</div>
