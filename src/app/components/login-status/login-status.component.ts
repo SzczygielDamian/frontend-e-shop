@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, OnInit, signal } from '@angular/core';
 import { OKTA_AUTH, OktaAuthStateService } from '@okta/okta-angular';
 import OktaAuth from '@okta/okta-auth-js';
 
@@ -10,8 +10,9 @@ import OktaAuth from '@okta/okta-auth-js';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginStatusComponent implements OnInit {
-    isAuthenticated: boolean = false;
-    userName: string = '';
+    isAuthenticated = signal(false);
+    userName = signal('');
+    initials = signal('');
 
     constructor(private oktaAuthService: OktaAuthStateService,
       @Inject(OKTA_AUTH) private oktaAuth: OktaAuth
@@ -19,17 +20,18 @@ export class LoginStatusComponent implements OnInit {
   ngOnInit(): void {
     this.oktaAuthService.authState$.subscribe(
       (res) => {
-        this.isAuthenticated = res.isAuthenticated!;
+        this.isAuthenticated.set(res.isAuthenticated!)
         this.getUserDetails();
       }
     )
   }
 
   getUserDetails() {
-    if (this.isAuthenticated) {
+    if (this.isAuthenticated()) {
       this.oktaAuth.getUser().then(
         (res) => {
-          this.userName = res.name as string;
+          this.userName.set(res.name as string);
+          this.setInitials(res.name as string);
         }
       )
     }
@@ -37,5 +39,11 @@ export class LoginStatusComponent implements OnInit {
 
   logout() {
     this.oktaAuth.signOut();
+  }
+
+  setInitials(fullName: string): void {
+    const splitFullName = fullName.split(" ");
+    const initials = splitFullName.map(part => part.charAt(0)).join("");
+    this.initials.set(initials)
   }
 }

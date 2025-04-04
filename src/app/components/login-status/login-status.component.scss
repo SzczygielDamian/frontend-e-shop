@@ -1,4 +1,22 @@
+::ng-deep .mat-mdc-menu-content {
+    background-color: #fff;
+}
+
+::ng-deep .mat-mdc-menu-panel {
+    margin-top: 2px;
+}
+
 button {
-    margin-left: 20px;
+    margin: 0 20px 0 20PX;
     background: #fff;
+}
+
+.mat-menu {
+    display: flex;
+    flex-direction: column;
+
+    p {
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
 }
