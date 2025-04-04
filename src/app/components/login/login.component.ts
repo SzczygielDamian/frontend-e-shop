@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, Inject, inject, OnInit } from '@angular/core';
-import { isRedirectUri, OktaAuth } from '@okta/okta-auth-js';
+import { ChangeDetectionStrategy, Component, Inject, inject, OnDestroy, OnInit } from '@angular/core';
+import { OktaAuth } from '@okta/okta-auth-js';
 import { OKTA_AUTH } from '@okta/okta-angular';
 import OktaSignIn from '@okta/okta-signin-widget';
 import myAppConfig from '../../config/my-app-config';
@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
   ngOnInit(): void {
     this.oktaSignin.remove();
 
@@ -46,6 +47,10 @@ export class LoginComponent implements OnInit {
     (error: any) => {
       throw error;
     }
-  )
+    )
   }
+
+  // ngOnDestroy(): void {
+  //   this.oktaSignin.remove();
+  // }
 }

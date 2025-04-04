@@ -37,7 +37,7 @@ const routes: Routes = [
     OktaAuthModule,
   ],
   providers: [{
-    provide: OKTA_CONFIG, useValue: { oktaAuth}}
+    provide: OKTA_CONFIG, useValue: { oktaAuth }}
   ],
   exports: [RouterModule]
 })

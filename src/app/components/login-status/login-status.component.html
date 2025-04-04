@@ -1,14 +1,21 @@
 <div>
-    @if (!isAuthenticated) {
-        <button 
-        mat-stroked-button
-        routerLink="/login"
-        >Login</button>
+    @if (!isAuthenticated()) {
+    <button mat-stroked-button routerLink="/login">Login</button>
     } @else {
-        <button 
-        mat-stroked-button
-        (click)="logout()"
-        >Logout</button>
+    <div class="example-button-row">
+        <div class="example-flex-container">
+            <div class="example-button-container">
+                <button mat-mini-fab [matMenuTriggerFor]="menu">
+                    {{ initials() }}
+                </button>
+            </div>
+        </div>
+    </div>
+    <mat-menu #menu="matMenu" class="customize">
+        <div class="mat-menu">
+            <p>{{ userName() }}</p>
+            <button mat-stroked-button (click)="logout()">Logout</button>
+        </div>
+    </mat-menu>
     }
-    
 </div>
