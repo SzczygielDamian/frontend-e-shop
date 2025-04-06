@@ -12,6 +12,18 @@ export class CartService {
   totalQuantity$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   cartItems$: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
 
+  storage: Storage = sessionStorage;
+
+  constructor() {
+    let data = JSON.parse(this.storage.getItem('cartItems') as string);
+    
+    if (data != null) {
+      this.cartItems = data;
+      this.cartItems$.next(data);
+      this.cartTotal();
+    }
+  }
+
   addToCart(newItem: CartItem): void {
     const item = this.cartItems.find(item => item.id === newItem.id);
     
@@ -23,11 +35,13 @@ export class CartService {
 
     this.cartTotal();
     this.cartItems$.next(this.cartItems);
+    this.persistCartItems();
   }
 
   cartTotal(): void {
     let totalCountItems: number = 0;
     let totalPriceItems: number = 0;
+    
     for (let item of this.cartItems) {
       totalCountItems += item._quantity;
       totalPriceItems += item._quantity * item.unitPrice;
@@ -46,5 +60,9 @@ export class CartService {
       this.cartItems = this.cartItems.filter(item => item.id !== itemId);
       this.cartItems$.next(this.cartItems);
       this.cartTotal();
+  }
+
+  persistCartItems() {
+    this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
   }
 }
