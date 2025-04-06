@@ -3,6 +3,7 @@ import { CartService } from '../../services/cart.service';
 import { CartItem } from '../../models/cartItem.interface';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-cart-details',
@@ -27,17 +28,23 @@ export class CartDetailsComponent implements OnInit, OnDestroy {
     totalPrice: number = 0;
     totalQuantity: number = 0;
 
-    
-
     ngOnInit(): void {
       this.cartDetails();
       this.activeUrl = this.router.url;
     }
 
     cartDetails(): void {
-      this.subscriptions.push(this.cartService.cartItems$.subscribe(items => this.cartItems = items));
-      this.subscriptions.push(this.cartService.totalPrice$.subscribe(price => this.totalPrice = price));
-      this.subscriptions.push(this.cartService.totalQuantity$.subscribe(quanity => this.totalQuantity = quanity));
+      this.subscriptions.push(
+        combineLatest([
+          this.cartService.cartItems$,
+          this.cartService.totalPrice$,
+          this.cartService.totalQuantity$
+        ]).subscribe(([items, price, quantity]) => {
+          this.cartItems = items;
+          this.totalPrice = price;
+          this.totalQuantity = quantity;   
+        })
+      );
     }
 
     incremental(item: CartItem): void { 
