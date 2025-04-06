@@ -62,7 +62,11 @@ export class CartService {
       this.cartTotal();
   }
 
-  persistCartItems() {
+  persistCartItems(): void {
     this.storage.setItem('cartItems', JSON.stringify(this.cartItems));
+  }
+
+  clearStorage(): void {
+    this.storage.clear();
   }
 }

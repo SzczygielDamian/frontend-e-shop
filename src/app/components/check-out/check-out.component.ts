@@ -121,6 +121,7 @@ export class CheckOutComponent implements OnInit {
     this.customer.reset();
     this.shippingAddress.reset();
     this.creditCard.reset();
+    this.cartService.clearStorage();
 
     this.router.navigateByUrl("/products");
   }
