@@ -18,15 +18,13 @@ export class ProductService {
 
   getProductList(theCategoryId: number, page: number, pageSize: number): Observable<GetResponse<'products', Product>> {
 
-    const url = `${this.baseUrl}products/search/findByCategoryId?id=${theCategoryId}`+ 
-                `&page=${page}&size=${pageSize}`
+    const url = `${this.baseUrl}products/search/findByCategoryId?id=${theCategoryId}&page=${page}&size=${pageSize}`
 
     return this.httpClient.get<GetResponse<'products', Product>>(url);
   }
 
   searchProducts(name: string, page: number, pageSize: number): Observable<GetResponse<'products', Product>> {
-    const url = `${this.baseUrl}products/search/findByNameContaining?name=${name}` + 
-                `&page=${page}&size=${pageSize}`
+    const url = `${this.baseUrl}products/search/findByNameContaining?name=${name}&page=${page}&size=${pageSize}`
     
     return this.httpClient.get<GetResponse<'products', Product>>(url);
   }

@@ -23,6 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ShoppingSummaryComponent } from './components/check-out/shopping-summury/shopping-summary.component';
 import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
+import { OrderHistoryComponent } from './components/order-history/order-history.component';
+import { OrderHistoryDetailsComponent } from './components/order-history-details/order-history-details.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import { LoginStatusComponent } from './components/login-status/login-status.com
     HeaderComponent,
     LoginComponent,
     LoginStatusComponent,
+    OrderHistoryComponent,
+    OrderHistoryDetailsComponent,
     PaginationComponent,
     ProductComponent,
     ProductDetailsComponent,

@@ -14,6 +14,7 @@
     <mat-menu #menu="matMenu" class="customize">
         <div class="mat-menu">
             <p>{{ userName() }}</p>
+            <button mat-stroked-button routerLink="/orders-history">Orders History</button>
             <button mat-stroked-button (click)="logout()">Logout</button>
         </div>
     </mat-menu>
