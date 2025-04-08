@@ -1,0 +1,47 @@
+@let ordersHistoryList = ordersHistory();
+@if (ordersHistoryList.length) {
+    <section class="example-container mat-elevation-z8" tabindex="0">
+      <table mat-table [dataSource]="ordersHistoryList">
+    
+        <ng-container matColumnDef="ordersTrackingNumber" sticky>
+          <th mat-header-cell *matHeaderCellDef> Order Tracking Number </th>
+          <td mat-cell *matCellDef="let element">{{ element.orderTrackingNumber}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="price">
+          <th mat-header-cell *matHeaderCellDef> Price </th>
+          <td mat-cell *matCellDef="let element"> {{ element.totalPrice | currency:'USD' }} </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="quantity">
+          <th mat-header-cell *matHeaderCellDef> Quantity </th>
+          <td mat-cell *matCellDef="let element"> {{ element.totalQuantity }}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{ element.dateCreated | date: 'medium'}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="details">
+          <th mat-header-cell *matHeaderCellDef> Details </th>
+          <td mat-cell *matCellDef="let element">    
+            <mat-icon aria-hidden="false" aria-label="Example shopping cart icon" fontIcon="file_open" (click)="orderHistoryDetails(element)"></mat-icon> 
+          </td>
+        </ng-container>
+    
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </section>
+    <app-pagination
+    [pageSize]="pageSize"
+    [pageNumber]="pageNumber"
+    [totalElements]="totalElements"
+    (pageChanged)="pageChanged($event)"
+  ></app-pagination>
+    } @else {
+    <!--ADD ALERT COMPONENT !!-->
+    Orders History is empty
+    }

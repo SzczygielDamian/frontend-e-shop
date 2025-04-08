@@ -1,6 +1,6 @@
 export interface OrderItem {
     imageUrl: string;
     unitPrice: number;
-    quanitity: number;
+    quantity: number;
     productId: number;
 }

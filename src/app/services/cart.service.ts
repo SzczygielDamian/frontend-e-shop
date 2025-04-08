@@ -67,6 +67,6 @@ export class CartService {
   }
 
   clearStorage(): void {
-    this.storage.clear();
+    this.storage.removeItem('cartItems');
   }
 }

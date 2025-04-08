@@ -88,7 +88,7 @@ export class CheckOutComponent implements OnInit {
       orderItems[i] = {
         imageUrl: this.cartItems[i].imageUrl,
         unitPrice: this.cartItems[i].unitPrice,
-        quanitity: this.cartItems[i]._quantity,
+        quantity: this.cartItems[i]._quantity,
         productId: this.cartItems[i].id
       }
     }
@@ -103,7 +103,6 @@ export class CheckOutComponent implements OnInit {
     this.checkoutService.placeOrder(purchase).subscribe(
       {
         next: res => {
-          console.log(res.orderTrackingNumber);
           this.resetCart();
         },
         error: err => {
