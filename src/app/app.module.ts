@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ProductListComponent } from './components/product-list/product-list.component';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ProductService } from './services/product.service';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -25,6 +25,8 @@ import { LoginComponent } from './components/login/login.component';
 import { LoginStatusComponent } from './components/login-status/login-status.component';
 import { OrderHistoryComponent } from './components/order-history/order-history.component';
 import { OrderHistoryDetailsComponent } from './components/order-history-details/order-history-details.component';
+import { AuthService } from './services/AuthServices/auth.service';
+import { AuthInterceptorService } from './services/AuthServices/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -51,12 +53,18 @@ import { OrderHistoryDetailsComponent } from './components/order-history-details
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     provideAnimationsAsync(),
-    provideHttpClient(),
+    provideHttpClient(withInterceptorsFromDi()),
     ProductService,
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptorService,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
